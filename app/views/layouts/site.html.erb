@@ -1,0 +1,114 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.80.0">
+
+    <title>TimeToAnser</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application' %>
+    <%= stylesheet_link_tag 'site' %>
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+
+  </head>
+  <body>
+    
+    <nav class="navbar fixed-top navbar-expand-md navbar-dark bg-dark mb-4">
+      <div class="container-fluid">
+        <li> 
+          <%= link_to site_welcome_index_path, class:"navbar-brand" do %>
+            Time to Answer
+          <% end %> 
+        </li>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        
+        <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
+          
+          <ul class="navbar-nav me-auto mb-2 mb-md-0 row">
+            <form class="d-flex">
+              <% unless user_signed_in? %>
+                <li> 
+                  <%= link_to new_user_session_path, class:"nav-link active" do %>
+                    <i class='fa fa-sign-in fa-fww'></i> Login
+                  <% end %> 
+                </li>
+                <li> <%= link_to 'Sing Up', new_user_registration_path, class: "nav-link active" %> </li>
+              <% else %>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <%= current_user.email %>
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                    <li>
+                      <%= link_to users_backoffice_welcome_index_path, class:"dropdown-item-dark" do %>
+                        <i class='fa fa-user fa-fww'></i> Profile
+                      <% end %>
+                    </li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li>
+                      <%= link_to destroy_user_session_path, class:"dropdown-item-dark", method: :delete do %>
+                        <i class='fa fa-sign-out fa-fww'></i> Logout
+                      <% end %>
+                    </li>
+                  </ul>
+                </li>
+              <%end%>
+            </form>
+          </ul>
+          <%= form_with(url: site_search_path, local: true, method: :get, class:"d-flex") do |form| %>
+            <%= form.text_field :term, class:"form-control me-2", placeholder:"Search" %>
+            <button class="btn btn-outline-success" type="submit">Search</button>
+          <% end %>
+        </div>
+      </div>
+    </nav>
+
+    <main class="container">
+      <div class="bg-light p-5 rounded">
+        <h1>Time to Answer!</h1>
+        <h2><%= msg_main %></h2>
+      </div>
+      <div class=" p-5 rounded">
+        <%= yield %>
+      </div>
+    </main>
+
+    <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
+    <%= javascript_include_tag 'application' %>
+    <%= javascript_include_tag 'site' %>
+
+    <% if notice %>
+			<%= javascript_tag do %>
+				$.bootstrapGrowl('<%= notice %>', {
+					type: 'success',
+					align: 'rigth',
+					alow_dismiss: 'true',
+					stackup_space: 10
+				});
+			<%end%>
+		<% end %>
+      
+  </body>
+</html>

@@ -1,0 +1,53 @@
+<div>
+  <div class="login_wrapper">
+    <div class="animate form login_form">
+      <section class="login_content">
+        <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+          <%= render "users/shared/error_messages", resource: resource %>
+         
+          <h1>Sign Up</h1>
+
+          <div>
+            <%= f.label :email %><br />
+            <%= f.email_field :email, autofocus: true, class: 'form-controle', placeholder: 'example@example.com' %>
+          </div>
+
+          <div>
+            <%= f.label :password %><br />
+            <% if @minimum_password_length %>
+            <em>(<%= @minimum_password_length %> characters minimum)</em>
+            <% end %><br />
+            <%= f.password_field :password, class:"form-control", autocomplete: "new-password" %>
+          </div>
+
+          <div>
+            <%= f.label :password_confirmation %><br />
+            <%= f.password_field :password_confirmation, class:"form-control", autocomplete: "new-password" %>
+          </div>
+
+          <div class='container'>
+            <div class='row '>
+              <div class="col-md-4 offset-md-4">
+                <%= f.submit "Sign Up", class:"btn btn-default submit" %>
+              </div>
+            </div>
+          </div>
+        
+          <div class="clearfix"></div>
+
+          <div class="separator">
+            <div class="clearfix"></div>
+            <br />
+            <div>
+              <h1><i class="fa fa-laptop"></i> Time To Answer!</h1>
+              <p>
+                <%= link_to 'Home', site_welcome_index_path %>
+              </p>
+            </div>
+          </div>
+
+        <% end %>
+      </section>
+    </div>
+  </div>
+</div>

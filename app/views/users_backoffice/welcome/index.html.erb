@@ -1,0 +1,34 @@
+<div class="center-col" role='main'>
+  <h1>Statistics</h1>
+  <div class="row" style="display: inline-block;">
+    <div class="top_tiles">
+      <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 ">
+        <div class="tile-stats">
+          <div class="icon"><i class="fa fa-question"></i></div>
+          <br />
+          <div class="count"> <%= @user_statistic.total_questions %> </div>
+          <h3>Total Answers</h3>
+          <p>__________________________________________</p>
+        </div>
+      </div>
+      <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 ">
+        <div class="tile-stats">
+          <div class="icon"><i class="fa fa-thumbs-o-up"></i></div>
+          <br />
+          <div class="count"><%= @user_statistic.right_question %></div>
+          <h3>Right Answers</h3>
+          <p>__________________________________________</p>
+        </div>
+      </div>
+      <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 ">
+        <div class="tile-stats">
+          <div class="icon"><i class="fa fa-thumbs-o-down"></i></div>
+          <br />
+          <div class="count"><%= @user_statistic.wrong_question %></div>
+          <h3>Wrong Answers</h3>
+          <p>__________________________________________</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

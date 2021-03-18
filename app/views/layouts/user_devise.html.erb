@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>TimeToAnser</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application' %>
+    <%= stylesheet_link_tag 'user_devise' %>
+  </head>
+
+  <body class="login">
+    <%= yield %>
+    
+    <%= javascript_include_tag 'application' %>
+    <%= javascript_include_tag 'user_devise' %>
+
+    <% if flash %>
+      <% flash.each do |key, value| %>
+        <%= javascript_tag do %>
+          $.bootstrapGrowl('<%= value %>', {
+          type: 'danger',
+          align: 'rigth',
+          alow_dismiss: 'true',
+          stackup_space: 10
+          });
+        <% end %>
+      <% end %>
+    <% end %>
+  </body>
+
+</html>

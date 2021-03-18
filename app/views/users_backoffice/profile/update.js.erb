@@ -1,0 +1,10 @@
+$('#avatar').modal('hide');
+
+// troca o avatar do menu lateral
+document.getElementById('avatarInfo').src = "<%= url_for(@user.user_profile.avatar) %>"
+
+// troca o avatar da Top-Nav
+document.getElementById('avatarTop').src = "<%= url_for(@user.user_profile.avatar) %>"
+
+// troca o avatar do Modal
+document.getElementById('avatarModal').src = "<%= url_for(@user.user_profile.avatar) %>"

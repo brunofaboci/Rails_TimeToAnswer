@@ -1,0 +1,40 @@
+<div class='table-responsive'>
+
+  <% @questions.each do |question|%>
+    <%= form_with url: site_answer_path do |form| %>
+      <div class="card">
+        <div class="card-header">
+          <span class='label label-info' style='margin-right: 10px'>
+            <%= link_to "#{question.subject.description} (#{question.subject.questions_count})", site_subject_path(question.subject_id, question.subject.description) %>
+          </span>
+          <%= question.description %>
+        </div>
+        <div class="card-body">
+          <ul>
+            <% question.answers.each do |answer| %>
+              <div class='radio'>
+                <label>
+                  <%= radio_button_tag 'answer_id', answer.id %>
+                  <%= answer.description %>
+                </label>
+              </div>
+            <% end %>
+            <%= form.submit 'Answer', class:'btn btn-outline-primary btn-sm', id:"submit_#{question.id}" %>
+          </ul>
+        </div>  
+      </div>
+    <% end %>
+    <br />
+  <% end %>
+
+  <% if user_signed_in? %>
+    <div class='text-center'>
+      <%= paginate @questions %>
+    </div>
+  <% else %>
+    <div class='alert alert-warning text-center'>
+      <h5>Sign-In to continue answer..</h5>
+    </div>
+  <% end %>
+  
+</div>

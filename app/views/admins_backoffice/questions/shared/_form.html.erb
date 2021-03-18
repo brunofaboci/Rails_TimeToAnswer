@@ -1,0 +1,57 @@
+<div class='row'>
+  <div class='col-lg-12'>
+    <h2 class='page-header'><%= action_message %></h2>
+  </div>
+</div>
+
+<div class='row'>
+  
+  <% if @question.errors.any? %>
+    <div class='alert alert-danger alert-dismissable'>
+      <button type='button' class='close' data-desmiss='alert' aria-hidden='true'>x</button>
+      <ul>
+        <% @question.errors.full_messages.each do |message| %>
+          <li> <%= message %> </li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class='col-lg-12'>
+    <div class='panel panel-default'>
+      <div class='panel-heading'>
+        Questions Information
+      </div>
+      <div class='panel-body'>
+        <div class='row'>
+          <div class='col-lg-6'>
+            <%= form_with(model: [:admins_backoffice, @question ], local: true) do |form| %>
+              <div class='form-group'>
+                <%= form.label :description %>
+                <%= form.text_area :description, class:'form-control', placeholder:'Science', rows:5 %>
+              </div>
+              <div class='form-group'>
+                <%= form.label :subject_id %>
+                <%= form.collection_select(:subject_id, @subjects, :id, :description, {}, {class:'form-control'})%>
+              </div>
+              <div id='answers'>
+                <%= form.fields_for :answers do |answer| %>
+                  <%= render partial: 'answer_fields', locals: {f: answers} %>
+                <% end %>
+                <br />
+                <%= link_to_add_association 'Add Answer', form, :answers, class:'btn btn-secondary' %>
+              </div>
+              <br />
+              <button type='submit' class='btn btn-primary'>
+                Submit
+              </button>
+              <%= link_to admins_backoffice_questions_path, class: 'btn btn-danger' do %>
+							  Cancel
+							<%end%>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

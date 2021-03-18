@@ -1,0 +1,25 @@
+var btnAnswer = document.getElementById('submit_<%= @answer.question_id %>');
+
+btnAnswer.classList.remove('btn-primary');
+btnAnswer.classList.remove('btn-success');
+btnAnswer.classList.remove('btn-danger');
+
+if (<%= @answer.correct %>) {
+  btnAnswer.classList.add('btn-success', {
+    $.bootstrapGrowl('Certa Resposta!', {
+    type: 'success',
+    align: 'right',
+    allow_dismiss: true,
+    stackup_space: 10
+    }),
+  }),
+} else {
+  btnAnswer.classList.add('btn-danger', {
+    $.bootstrapGrowl('Que Pena, Você Errou!', {
+    type: 'danger',
+    align: 'right',
+    allow_dismiss: true,
+    stackup_space: 10
+    }),
+  }),
+};
